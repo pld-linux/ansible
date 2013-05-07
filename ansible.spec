@@ -1,7 +1,7 @@
 Summary:	Minimal SSH command and control
 Name:		ansible
 Version:	1.1
-Release:	0.1
+Release:	0.2
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/ansible/ansible/archive/release%{version}.tar.gz
@@ -39,7 +39,7 @@ rm -rf $RPM_BUILD_ROOT
 %py_postclean
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/%{name},%{_datadir}/%{name},%{_mandir}/man1}
-cp -p examples/hosts $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
+sed -re '/^#/ !s,[^#]+$,#&,' examples/hosts > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/hosts
 cp -p docs/man/man1/ansible.1 $RPM_BUILD_ROOT%{_mandir}/man1/ansible.1
 cp -p docs/man/man1/ansible-playbook.1 $RPM_BUILD_ROOT%{_mandir}/man1/ansible-playbook.1
 cp -a library/* $RPM_BUILD_ROOT%{_datadir}/%{name}
