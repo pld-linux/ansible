@@ -7,6 +7,8 @@ Group:		Development/Libraries
 Source0:	https://github.com/ansible/ansible/archive/release%{version}.tar.gz
 # Source0-md5:	92e66d233fd7130ea23dfb61ba3b4856
 URL:		http://ansible.github.com/
+BuildRequires:	python-modules >= 1:2.6
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	python-PyYAML
 Requires:	python-jinja2
