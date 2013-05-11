@@ -1,13 +1,15 @@
 Summary:	Minimal SSH command and control
 Name:		ansible
 Version:	1.2
-Release:	0.6
+Release:	0.8
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/ansible/ansible/archive/devel.tar.gz?/1.2-dev.tgz
 # Source0-md5:	7dcb52644cbe4e9dc998246e69ca3edc
 Patch0:		https://github.com/glensc/ansible/compare/pm-poldek.patch
 # Patch0-md5:	c5df4e6b4a964ddd75e88b98743c5feb
+Patch1:		https://github.com/glensc/ansible/compare/rc.d-systemd.patch
+# Patch1-md5:	58add52a8243e9c8daf5ddce56d5385b
 URL:		http://ansible.github.com/
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	rpm-pythonprov
