@@ -1,13 +1,13 @@
 Summary:	Minimal SSH command and control
 Name:		ansible
 Version:	1.2
-Release:	0.8
+Release:	0.10
 License:	GPL v3+
 Group:		Development/Libraries
-Source0:	https://github.com/ansible/ansible/archive/devel.tar.gz?/1.2-dev.tgz
+Source0:	https://github.com/ansible/ansible/archive/devel.tar.gz?/%{version}-dev.tgz
 # Source0-md5:	7dcb52644cbe4e9dc998246e69ca3edc
 Patch0:		https://github.com/glensc/ansible/compare/pm-poldek.patch
-# Patch0-md5:	c5df4e6b4a964ddd75e88b98743c5feb
+# Patch0-md5:	da4815872cf281741afa01a88a18da95
 Patch1:		https://github.com/glensc/ansible/compare/rc.d-systemd.patch
 # Patch1-md5:	58add52a8243e9c8daf5ddce56d5385b
 URL:		http://ansible.github.com/
@@ -34,6 +34,7 @@ mv %{name}-devel/* .
 
 %build
 %{__python} setup.py build
+%{__make} modulepages
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -44,11 +45,13 @@ rm -rf $RPM_BUILD_ROOT
 
 #py_postclean
 
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/%{name},%{_datadir}/%{name},%{_mandir}/man1}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/%{name},%{_datadir}/%{name},%{_mandir}}
 sed -re '/^#/ !s,[^#]+$,#&,' examples/hosts > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/hosts
-cp -p docs/man/man1/ansible.1 $RPM_BUILD_ROOT%{_mandir}/man1/ansible.1
-cp -p docs/man/man1/ansible-playbook.1 $RPM_BUILD_ROOT%{_mandir}/man1/ansible-playbook.1
+cp -a docs/man/* $RPM_BUILD_ROOT%{_mandir}
 cp -a library/* $RPM_BUILD_ROOT%{_datadir}/%{name}
+
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/*.asciidoc.in
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man3/.gitdir
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -63,7 +66,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ansible-playbook
 %attr(755,root,root) %{_bindir}/ansible-pull
 %{_mandir}/man1/ansible.1*
+%{_mandir}/man1/ansible-doc.1*
 %{_mandir}/man1/ansible-playbook.1*
+%{_mandir}/man1/ansible-pull.1*
+%{_mandir}/man3/ansible.*.3*
 %{_datadir}/%{name}
 %{py_sitescriptdir}/ansible
 %{py_sitescriptdir}/ansible-%{version}-*.egg-info
