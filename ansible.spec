@@ -1,11 +1,11 @@
 Summary:	Minimal SSH command and control
 Name:		ansible
-Version:	1.1
+Version:	1.2
 Release:	0.6
 License:	GPL v3+
 Group:		Development/Libraries
-Source0:	https://github.com/ansible/ansible/archive/release%{version}.tar.gz
-# Source0-md5:	92e66d233fd7130ea23dfb61ba3b4856
+Source0:	https://github.com/ansible/ansible/archive/devel.tar.gz?/1.2-dev.tgz
+# Source0-md5:	7dcb52644cbe4e9dc998246e69ca3edc
 Patch0:		https://github.com/glensc/ansible/compare/pm-poldek.patch
 # Patch0-md5:	c5df4e6b4a964ddd75e88b98743c5feb
 URL:		http://ansible.github.com/
@@ -26,9 +26,9 @@ on remote nodes. Extension modules can be written in any language and
 are transferred to managed machines automatically.
 
 %prep
-%setup -q -n %{name}-release%{version}
-cd library
-%patch0 -p3
+%setup -qc
+mv %{name}-devel/* .
+%patch0 -p1
 
 %build
 %{__python} setup.py build
