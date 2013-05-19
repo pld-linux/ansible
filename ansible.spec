@@ -17,6 +17,9 @@ BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	python-PyYAML
 Requires:	python-jinja2
 Requires:	python-paramiko
+%if "%{py_ver}" < "2.6"
+Requires:	python-simplejson
+%endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
