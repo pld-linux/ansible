@@ -1,15 +1,15 @@
 Summary:	Minimal SSH command and control
 Name:		ansible
 Version:	1.2
-Release:	0.10
+Release:	0.11
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://github.com/ansible/ansible/archive/devel.tar.gz?/%{version}-dev.tgz
 # Source0-md5:	7dcb52644cbe4e9dc998246e69ca3edc
 Patch0:		https://github.com/glensc/ansible/compare/pm-poldek.patch
-# Patch0-md5:	da4815872cf281741afa01a88a18da95
+# Patch0-md5:	91dd49cb9c64c52615aec95341c40128
 Patch1:		https://github.com/glensc/ansible/compare/rc.d-systemd.patch
-# Patch1-md5:	58add52a8243e9c8daf5ddce56d5385b
+# Patch1-md5:	a51f047c5514124dc29221f3336be402
 URL:		http://ansible.github.com/
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	rpm-pythonprov
@@ -50,6 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/%{name},%{_datadir}/%{name},%{_mandir}}
 sed -re '/^#/ !s,[^#]+$,#&,' examples/hosts > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/hosts
+cp -p examples/ansible.cfg $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 cp -a docs/man/* $RPM_BUILD_ROOT%{_mandir}
 cp -a library/* $RPM_BUILD_ROOT%{_datadir}/%{name}
 
@@ -64,6 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc VERSION *.md
 %dir %{_sysconfdir}/%{name}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/hosts
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/%{name}.cfg
 %attr(755,root,root) %{_bindir}/ansible
 %attr(755,root,root) %{_bindir}/ansible-doc
 %attr(755,root,root) %{_bindir}/ansible-playbook
