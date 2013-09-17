@@ -1,11 +1,11 @@
 Summary:	SSH-based configuration management, deployment, and task execution system
 Name:		ansible
-Version:	1.2
-Release:	0.12
+Version:	1.3.1
+Release:	0.1
 License:	GPL v3+
 Group:		Development/Libraries
-Source0:	https://github.com/ansible/ansible/archive/devel.tar.gz?/%{version}-dev.tgz
-# Source0-md5:	7dcb52644cbe4e9dc998246e69ca3edc
+Source0:	https://github.com/ansible/ansible/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	15b72c9f0d9c0d01c90c4e431a3fe3ae
 Patch0:		https://github.com/glensc/ansible/compare/pm-poldek.patch
 # Patch0-md5:	91dd49cb9c64c52615aec95341c40128
 Patch1:		https://github.com/glensc/ansible/compare/rc.d-systemd.patch
@@ -55,8 +55,7 @@ additional requirements for nodes to use. This package includes those
 requirements.
 
 %prep
-%setup -qc
-mv %{name}-devel/* .
+%setup -q
 %patch0 -p1
 
 %build
