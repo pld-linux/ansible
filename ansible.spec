@@ -13,7 +13,7 @@ Patch1:		https://github.com/glensc/ansible/compare/rc.d-systemd.patch
 URL:		http://ansible.github.com/
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 Requires:	python-PyYAML
 Requires:	python-jinja2
 Requires:	python-modules
