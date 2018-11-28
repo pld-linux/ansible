@@ -1,12 +1,11 @@
-%define		subver	1
 Summary:	SSH-based configuration management, deployment, and task execution system
 Name:		ansible
-Version:	2.4.3.0
+Version:	2.6.8
 Release:	0.1
 License:	GPL v3+
 Group:		Development/Libraries
-Source0:	https://github.com/ansible/ansible/archive/v%{version}-%{subver}/%{name}-%{version}-%{subver}.tar.gz
-# Source0-md5:	aabc916a200bc5ad4ecbc29b2685ac87
+Source0:	https://releases.ansible.com/ansible/%{name}-%{version}.tar.gz
+# Source0-md5:	3e8442a9c50abcb5bed39e4676e3641f
 Patch0:		https://github.com/glensc/ansible/compare/pm-poldek.patch
 # Patch0-md5:	91dd49cb9c64c52615aec95341c40128
 Patch1:		https://github.com/glensc/ansible/compare/rc.d-systemd.patch
@@ -33,7 +32,7 @@ on remote nodes. Extension modules can be written in any language and
 are transferred to managed machines automatically.
 
 %prep
-%setup -q -n %{name}-%{version}-%{subver}
+%setup -q
 %patch0 -p1
 
 %build
@@ -51,7 +50,6 @@ sed -re '/^#/ !s,[^#]+$,#&,' examples/hosts > $RPM_BUILD_ROOT%{_sysconfdir}/%{na
 cp -p examples/ansible.cfg $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 cp -a docs/man/* $RPM_BUILD_ROOT%{_mandir}
 
-%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/*.asciidoc.in
 %{__rm} $RPM_BUILD_ROOT%{_mandir}/man3/.gitdir
 
 %clean
@@ -59,7 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc VERSION *.md
+%doc README.rst
 %dir %{_sysconfdir}/%{name}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/hosts
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/%{name}.cfg
