@@ -1,13 +1,13 @@
 Summary:	SSH-based configuration management, deployment, and task execution system
 Name:		ansible
-Version:	2.6.8
+Version:	2.7.2
 Release:	0.1
 License:	GPL v3+
 Group:		Development/Libraries
 Source0:	https://releases.ansible.com/ansible/%{name}-%{version}.tar.gz
-# Source0-md5:	3e8442a9c50abcb5bed39e4676e3641f
+# Source0-md5:	e9bbd49c4918f93fdab43652faa0508b
 Patch0:		https://github.com/glensc/ansible/compare/pm-poldek.patch
-# Patch0-md5:	91dd49cb9c64c52615aec95341c40128
+# Patch0-md5:	5eeddbd3559fb6b148c06b1a6f3dc3dc
 Patch1:		https://github.com/glensc/ansible/compare/rc.d-systemd.patch
 # Patch1-md5:	a51f047c5514124dc29221f3336be402
 URL:		http://ansible.github.com/
